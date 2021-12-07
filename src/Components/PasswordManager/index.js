@@ -2,6 +2,8 @@ import {Component} from 'react'
 
 import {v4} from 'uuid'
 
+import PasswordItem from '../PasswordItem'
+
 import './index.css'
 
 class PasswordManager extends Component {
@@ -84,7 +86,6 @@ class PasswordManager extends Component {
                 src="https://assets.ccbp.in/frontend/react-js/password-manager-username-img.png"
                 alt="username"
                 className="username-img"
-                onChange={this.onChangeUsername}
               />
               <hr className="hr" />
               <input
@@ -92,6 +93,7 @@ class PasswordManager extends Component {
                 className="username-input"
                 placeholder="Enter Username"
                 value={usernameInput}
+                onChange={this.onChangeUsername}
               />
             </div>
             <div className="password-container">
@@ -141,6 +143,11 @@ class PasswordManager extends Component {
             </div>
           </div>
           <hr className="hr3" />
+          <ul>
+            {passwordItemsList.map(item => (
+              <PasswordItem passwordDetails={item} />
+            ))}
+          </ul>
         </div>
       </div>
     )
