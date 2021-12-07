@@ -1,4 +1,7 @@
 import {Component} from 'react'
+
+import {v4} from 'uuid'
+
 import './index.css'
 
 class PasswordManager extends Component {
@@ -7,6 +10,7 @@ class PasswordManager extends Component {
     usernameInput: '',
     passwordInput: '',
     passwordItemsList: [],
+    isFilterActive: false,
   }
 
   onChangeWebsite = event => {
@@ -19,6 +23,25 @@ class PasswordManager extends Component {
 
   onChangePassword = event => {
     this.setState({passwordInput: event.target.value})
+  }
+
+  onAddPasswordItem = event => {
+    event.preventDefault()
+    const {websiteInput, usernameInput, passwordInput} = this.state
+
+    const newItem = {
+      id: v4(),
+      website: websiteInput,
+      username: usernameInput,
+      password: passwordInput,
+      isCheck: false,
+    }
+    this.setState(prevState => ({
+      passwordItemsList: [...prevState.passwordItemsList, newItem],
+      websiteInput: '',
+      usernameInput: '',
+      passwordInput: '',
+    }))
   }
 
   render() {
@@ -39,7 +62,7 @@ class PasswordManager extends Component {
           />
         </div>
         <div className="input-containers">
-          <form className="form-container">
+          <form className="form-container" onSubmit={this.onAddPasswordItem}>
             <h1 className="heading">Add New Password</h1>
             <div className="website-container">
               <img
