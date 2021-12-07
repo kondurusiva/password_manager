@@ -184,3 +184,17 @@
 .hr3 {
   width: 100%;
 }
+
+.checkbox-container {
+  display: flex;
+  margin-left: auto;
+}
+
+.label-text {
+  font-family: 'Roboto';
+  color: #ffffff;
+}
+
+.check-box {
+  padding: 100px;
+}
