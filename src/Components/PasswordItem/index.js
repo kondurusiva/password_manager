@@ -1,7 +1,7 @@
 import './index.css'
 
 const PasswordItem = props => {
-  const {passwordDetails} = props
+  const {passwordDetails, toggleIsClicked} = props
   const {
     id,
     website,
@@ -21,6 +21,10 @@ const PasswordItem = props => {
     />
   )
 
+  const onClickCheckbox = () => {
+    toggleIsClicked(id)
+  }
+
   const onDeleteItem = () => {
     const {deleteItem} = props
     deleteItem(id)
@@ -33,7 +37,12 @@ const PasswordItem = props => {
         <p className="username">{username}</p>
         <p>{passwordIsCheck}</p>
       </div>
-      <button onClick={onDeleteItem} className="del-btn" type="button">
+      <button
+        testid="delete"
+        onClick={onDeleteItem}
+        className="del-btn"
+        type="button"
+      >
         <img
           src="https://assets.ccbp.in/frontend/react-js/password-manager-delete-img.png"
           alt="delete"
