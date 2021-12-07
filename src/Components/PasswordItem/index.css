@@ -1,0 +1,17 @@
+.item-container {
+  display: flex;
+  border: 1px solid #64748b;
+  border-radius: 5px;
+  padding: 5px;
+  list-style-type: none;
+}
+
+.star-img {
+  background-color: transparent;
+  width: 80px;
+  height: 12px;
+}
+.del-btn {
+  background-color: transparent;
+  border-width: 0px;
+}
