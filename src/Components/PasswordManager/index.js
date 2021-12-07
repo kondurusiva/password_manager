@@ -25,6 +25,17 @@ class PasswordManager extends Component {
     isFilterActive: false,
   }
 
+  toggleIsClicked = id => {
+    this.setState(prevState => ({
+      passwordItemsList: prevState.passwordItemsList.map(eachItem => {
+        if (id === eachItem.id) {
+          return {...prevState.passwordItemsList, isCheck: !eachItem.isCheck}
+        }
+        return eachItem
+      }),
+    }))
+  }
+
   onChangeWebsite = event => {
     this.setState({websiteInput: event.target.value})
   }
@@ -151,9 +162,9 @@ class PasswordManager extends Component {
         </div>
         <div className="second-container">
           <div className="passwords-label">
-            <p className="your-password-text">
+            <h1 className="your-password-text">
               Your Passwords <span>{passwordItemsList.length}</span>
-            </p>
+            </h1>
             <div className="search-container">
               <img
                 src="https://assets.ccbp.in/frontend/react-js/password-manager-search-img.png"
@@ -169,12 +180,19 @@ class PasswordManager extends Component {
             </div>
           </div>
           <hr className="hr3" />
+          <div className="checkbox-container">
+            <input className="check-box" id="checkbox" type="checkbox" />
+            <label className="label-text" htmlFor="checkbox">
+              show passwords
+            </label>
+          </div>
           <ul className="items-list">
             {passwordItemsList.map(item => (
               <PasswordItem
                 key={item.id}
                 deleteItem={this.deleteItem}
                 passwordDetails={item}
+                toggleIsClicked={this.toggleIsClicked}
               />
             ))}
           </ul>
