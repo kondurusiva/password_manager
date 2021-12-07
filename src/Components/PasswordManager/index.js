@@ -6,6 +6,16 @@ import PasswordItem from '../PasswordItem'
 
 import './index.css'
 
+const initialContainerBackgroundClassNames = [
+  'amber',
+  'blue',
+  'orange',
+  'emerald',
+  'teal',
+  'red',
+  'light-blue',
+]
+
 class PasswordManager extends Component {
   state = {
     websiteInput: '',
@@ -31,12 +41,21 @@ class PasswordManager extends Component {
     event.preventDefault()
     const {websiteInput, usernameInput, passwordInput} = this.state
 
+    const initialBackgroundColorClassName = `initial-container ${
+      initialContainerBackgroundClassNames[
+        Math.ceil(
+          Math.random() * initialContainerBackgroundClassNames.length - 1,
+        )
+      ]
+    }`
+
     const newItem = {
       id: v4(),
       website: websiteInput,
       username: usernameInput,
       password: passwordInput,
       isCheck: false,
+      initialClassName: initialBackgroundColorClassName,
     }
     this.setState(prevState => ({
       passwordItemsList: [...prevState.passwordItemsList, newItem],
@@ -44,6 +63,13 @@ class PasswordManager extends Component {
       usernameInput: '',
       passwordInput: '',
     }))
+  }
+
+  deleteItem = itemId => {
+    const {passwordItemsList} = this.state
+    this.setState({
+      passwordItemsList: passwordItemsList.filter(item => item.id !== itemId),
+    })
   }
 
   render() {
@@ -143,9 +169,13 @@ class PasswordManager extends Component {
             </div>
           </div>
           <hr className="hr3" />
-          <ul>
+          <ul className="items-list">
             {passwordItemsList.map(item => (
-              <PasswordItem passwordDetails={item} />
+              <PasswordItem
+                key={item.id}
+                deleteItem={this.deleteItem}
+                passwordDetails={item}
+              />
             ))}
           </ul>
         </div>
