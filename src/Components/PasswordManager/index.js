@@ -2,7 +2,33 @@ import {Component} from 'react'
 import './index.css'
 
 class PasswordManager extends Component {
+  state = {
+    websiteInput: '',
+    usernameInput: '',
+    passwordInput: '',
+    passwordItemsList: [],
+  }
+
+  onChangeWebsite = event => {
+    this.setState({websiteInput: event.target.value})
+  }
+
+  onChangeUsername = event => {
+    this.setState({usernameInput: event.target.value})
+  }
+
+  onChangePassword = event => {
+    this.setState({passwordInput: event.target.value})
+  }
+
   render() {
+    const {
+      websiteInput,
+      usernameInput,
+      passwordInput,
+      passwordItemsList,
+    } = this.state
+
     return (
       <div className="app-container">
         <div className="logo-container">
@@ -26,6 +52,8 @@ class PasswordManager extends Component {
                 type="text"
                 placeholder="Enter Website"
                 className="website-input"
+                onChange={this.onChangeWebsite}
+                value={websiteInput}
               />
             </div>
             <div className="username-container">
@@ -33,12 +61,14 @@ class PasswordManager extends Component {
                 src="https://assets.ccbp.in/frontend/react-js/password-manager-username-img.png"
                 alt="username"
                 className="username-img"
+                onChange={this.onChangeUsername}
               />
               <hr className="hr" />
               <input
                 type="text"
                 className="username-input"
                 placeholder="Enter Username"
+                value={usernameInput}
               />
             </div>
             <div className="password-container">
@@ -51,6 +81,8 @@ class PasswordManager extends Component {
               <input
                 className="password-input"
                 type="password"
+                onChange={this.onChangePassword}
+                value={passwordInput}
                 placeholder="Enter Password"
               />
             </div>
@@ -68,7 +100,9 @@ class PasswordManager extends Component {
         </div>
         <div className="second-container">
           <div className="passwords-label">
-            <p className="your-password-text">Your Passwords</p>
+            <p className="your-password-text">
+              Your Passwords <span>{passwordItemsList.length}</span>
+            </p>
             <div className="search-container">
               <img
                 src="https://assets.ccbp.in/frontend/react-js/password-manager-search-img.png"
