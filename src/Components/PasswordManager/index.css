@@ -17,6 +17,11 @@
   width: 30%;
 }
 
+.items-list {
+  padding-left: 0;
+  margin-top: 0;
+}
+
 .input-containers {
   background-color: #5763a5;
   padding: 20px;
